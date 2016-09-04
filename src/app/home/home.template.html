@@ -1,0 +1,7 @@
+
+<div *ngIf="!hasToken" class="login-container">
+  <login-button></login-button>
+</div>
+<div *ngIf="hasToken" class="login-container">
+  Welcome {{user.display_name}}
+</div>

@@ -1,0 +1,52 @@
+@import "../scss/helpers/variables";
+
+.main {
+  display: flex;
+  background-color: $color-primary;
+  a {
+    color: $color-inverse-text-icons;
+  }
+  a:hover {
+    color: $color-divider;
+  }
+  a:active {
+    color: $color-inverse-text-icons;
+
+  }
+
+  .left {
+    flex: 1;
+    align-items: flex-start;
+  }
+  .right {
+    flex: 1;
+    align-items: flex-end;
+    img {
+      width: 3.05em;
+    }
+  }
+}
+
+.flex-nav {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media all and (min-width: 800px) {
+  .flex-nav {
+    flex-direction: row;
+  }
+}
+
+.flex-nav li {
+  flex: 1;
+  padding: 3em 3em 3em 3em;
+  display: block;
+  a {
+    display: block;
+    text-align: center;
+  }
+}
