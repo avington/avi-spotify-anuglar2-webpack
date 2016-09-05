@@ -27,7 +27,7 @@ import {
       <nav class="left">
         <ul class="flex-nav">
           <li><a routerLink="/home">Home</a></li>
-          <li><a href="#">Child 02</a></li>
+          <li><a routerLink="/search">Search</a></li>
           <li><a href="#">Child 03</a></li>
           <li><a href="#">Child 04</a></li>
           <li><a href="#">Child 05</a></li>

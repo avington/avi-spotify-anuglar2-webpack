@@ -1,0 +1,33 @@
+.track-summary {
+
+  padding: 1.00em 1.00em 1.00em 1.00em;
+
+  .img-container {
+    width: 8.00em;
+
+    img {
+      width: 6.00em;
+    }
+  }
+
+  .track-details {
+    margin-top: 1.50em;
+
+    .artists {
+      display: flex;
+      justify-content: center;
+      div {
+        text-align: right;
+        padding-right: 1.00em;
+      }
+      ul {
+        text-align: left;
+        padding-left: 1.00em;
+      }
+    }
+  }
+
+
+
+
+}

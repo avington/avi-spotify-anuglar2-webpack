@@ -1,0 +1,25 @@
+<div class="track-summary grid">
+  <div class="img-container">
+    <img [src]="track.album.images[0].url">
+  </div>
+  <div class="track-details grid grid-cell">
+
+    <div class="grid-cell grid-gutters">
+      <span>Song:</span>
+      <span>{{track.name}}</span>
+    </div>
+
+    <div class="grid-cell grid-gutters">
+      <span>Album:</span>
+      <span>{{track.album.name}}</span>
+    </div>
+    <div class="grid-cell grid-gutters artists">
+      <div class="grid-cell grid-gutters">Artist:</div>
+      <ul class="grid-cell grid-gutters">
+        <li *ngFor="let item of track.artists">
+          {{item.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -13,5 +13,8 @@ export const ROUTES: Routes = [
   {
     path: 'detail', loadChildren: () => System.import('./+detail')
   },
+  {
+    path: 'search', loadChildren: () => System.import('./+search')
+  },
   { path: '**',    component: NoContent },
 ];

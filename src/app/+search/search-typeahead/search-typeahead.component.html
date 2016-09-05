@@ -1,0 +1,9 @@
+<div class="search-typeahead-container form-control">
+  <input type="text" placeholder="Search" [formControl]="searchControl" [(ngModel)]="search.query">
+
+  <select name="city" [(ngModel)]="search.type" (change)="onTypeChange($event.target.value)">
+    <option *ngFor="let searchType of searchTypes" [value]="searchType">{{searchType}}</option>
+  </select>
+
+</div>
+

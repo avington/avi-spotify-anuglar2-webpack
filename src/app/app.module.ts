@@ -4,6 +4,8 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
+import { Store, StoreModule } from '@ngrx/store';
+import {searchListReducer} from './store'
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -49,7 +51,8 @@ const APP_PROVIDERS = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, {useHash: true})
+    RouterModule.forRoot(ROUTES, {useHash: true}),
+    StoreModule.provideStore({searchList: searchListReducer}, {searchList: {}})
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

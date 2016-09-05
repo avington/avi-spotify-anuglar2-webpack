@@ -1,0 +1,12 @@
+.search-typeahead-container {
+  display: flex;
+  justify-content: center;
+
+  [type='text'] {
+    width: 20.00em;
+  }
+
+  select {
+    width: 5.00em;
+  }
+}

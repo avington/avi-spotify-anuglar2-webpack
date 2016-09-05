@@ -1,0 +1,10 @@
+<div class="grid grid-center">
+  <div class="grid-cell">
+    <h2>Tracks</h2>
+  </div>
+</div>
+<ul>
+  <li *ngFor="let item of tracks.items">
+    <track-summary [track]="item"></track-summary>
+  </li>
+</ul>
