@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AuthService} from '../../auth';
+import {CLIENT_ID, REDIRECT_URI} from '../../auth/settings'
 
-const CLIENT_ID = 'af3db6d520e2463284e9e31d03ee7311';
-const REDIRECT_URI = `http://localhost:3000/callback.html`;
 
 @Injectable()
 export class LoginWindowService {

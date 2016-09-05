@@ -1,5 +1,7 @@
 # @AngularClass
 
+src/app/auth/settings.ts
+
 # Logs
 logs
 *.log
