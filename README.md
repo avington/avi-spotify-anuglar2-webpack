@@ -1,4 +1,4 @@
-
+# This project was started from the Angular-Class webpack Angular 2 Starter Project
 
 ## File Structure
 We use the component approach in our starter. This is the new standard for developing Angular apps and a great way to ensure maintainable code by encapsulation of our behavior logic. A component is basically a self contained app usually in a single file or a folder with each concern as a file: style, template, specs, e2e, and component class. Here's how it looks:
