@@ -40,8 +40,11 @@ export class LoginWindowService {
     window.addEventListener('message', (event: any) => {
 
       if (event && event.data) {
+        let hash: any = {type: ''};
+        try {
+           hash = JSON.parse(event.data);
+        } catch(err) {}
 
-        const hash = JSON.parse(event.data);
         if (hash.type === 'access_token') {
           this.auth.setAccessToken(hash.access_token, hash.expires_in || 60);
           if (callback) {

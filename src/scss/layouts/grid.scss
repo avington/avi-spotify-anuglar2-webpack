@@ -26,12 +26,24 @@
 }
 
 /* Alignment per cell */
-.grid-cell--top {
+.grid-cell-top {
   align-self: flex-start;
 }
-.grid-cell--bottom {
+.grid-cell-bottom {
   align-self: flex-end;
 }
-.grid-cell--center {
+.grid-cell-center {
   align-self: center;
+}
+
+.grid-justify-start {
+  justify-content: flex-start;
+}
+
+.grid-justify-center {
+  justify-content: center;
+}
+
+.grid-justify-end {
+  justify-content: flex-end;
 }

@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
-import {StorageService} from './storage.service'
-import {ITokenContainer} from "../auth";
+import {Observable}     from 'rxjs/Rx';
 import {Headers, Http, Response} from '@angular/http';
-import {Observable}     from 'rxjs/Observable';
+import {Router} from '@angular/router'
+
+import {StorageService} from './storage.service'
+import {ITokenContainer} from "../../auth";
+
+
 import {Store} from '@ngrx/store';
-import {RESET} from '../store/spotify-list.store'
+import {RESET} from '../../store/spotify-list.store';
 
 const BASE_URL = 'https://api.spotify.com/v1';
 
@@ -34,7 +38,9 @@ export class SpotifyService {
 
   constructor(private storage: StorageService,
               private http: Http,
-              private store: Store<any>) {
+              private store: Store<any>,
+              private router: Router
+          ) {
   }
 
   getMe = () => {
@@ -51,8 +57,14 @@ export class SpotifyService {
     this.searchApi(query, inputType)
       .subscribe((data) => {
         this.store.dispatch({type: RESET, payload: data});
+      },
+        (error) => {
+          console.log(error);
+          if (error && error.status === 401) {
+            this.router.navigate(['/home']);
+          }
+        });
 
-      })
   };
 
   private searchApi = (q: string, inputType: string) => {
@@ -63,7 +75,8 @@ export class SpotifyService {
       `${BASE_URL}/search?q=${q}&type=${inputType}`, {
         headers: authHeader
       })
-      .map(this.extractData);
+      .map(this.extractData)
+      .catch(this.handleError);
 
   };
 
@@ -81,6 +94,10 @@ export class SpotifyService {
     let body = res.json();
     return body || {};
   };
+
+  handleError = (error: any) => {
+    return Observable.throw(error.json().error);
+  }
 
 
 }

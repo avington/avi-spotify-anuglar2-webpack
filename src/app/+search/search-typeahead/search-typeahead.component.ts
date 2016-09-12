@@ -51,7 +51,7 @@ export class SearchTypeAheadComponent implements OnInit {
      console.log(term);
      });
      */
-    const keypresses = this.searchControl.valueChanges;
+    const keypresses: Observable<any> = this.searchControl.valueChanges;
 
     const search = (q => console.log(q));
 
@@ -62,6 +62,8 @@ export class SearchTypeAheadComponent implements OnInit {
       .debounceTime(400)
       .distinctUntilChanged();
 
+
+
     this.items.subscribe(q => {
       console.log('search', this.search);
       this.spotify.search(q, this.search.type);
@@ -70,7 +72,10 @@ export class SearchTypeAheadComponent implements OnInit {
   };
 
   onTypeChange = (type: string) => {
-    this.spotify.search(this.search.query, type);
+    if (this.search.query && this.search.query.length > 2) {
+      this.spotify.search(this.search.query, type);
+    }
+
   }
 
 }

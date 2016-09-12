@@ -13,5 +13,6 @@ export class PlaylistSummaryComponent implements OnInit {
   @Input() playlist: any;
 
   ngOnInit() {
+
   }
 }

@@ -1,0 +1,33 @@
+<div class="artist-summary grid">
+  <div class="img-container">
+    <img *ngIf="artist.images && artist.images.length > 0" [src]="artist.images[0].url">
+  </div>
+  <div class="artist-details grid grid-cell">
+
+    <div class="artist-name">
+      <span>Artist:</span>
+      <span>{{artist.name}}</span>
+    </div>
+
+    <div class="grid genres grid-justify-center">
+
+      <span class="grid-cell" *ngIf="artist.genres && artist.genres.length > 0">Genres:</span>
+      <span class="grid-cell" *ngIf="artist.genres && artist.genres.length > 0">
+        <ul>
+            <li *ngFor="let item of artist.genres">{{item}}</li>
+        </ul>
+      </span>
+
+    </div>
+
+    <div class="popularity">
+      <span>Popularity:</span>
+      <span>{{artist.popularity}}</span>
+
+    </div>
+
+    <div class="followers">
+      <span *ngIf="artist.followers">Followers:</span>
+      <span *ngIf="artist.followers">{{artist.followers.total | number}}</span>
+    </div>
+  </div>

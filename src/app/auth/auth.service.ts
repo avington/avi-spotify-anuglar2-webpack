@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {StorageService} from '../common/storage.service'
+import {StorageService} from '../common/services/storage.service'
 import moment = require("moment");
 
 export interface ITokenContainer {

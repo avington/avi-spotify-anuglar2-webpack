@@ -1,0 +1,10 @@
+<div class="grid grid-center">
+  <div class="grid-cell">
+    <h2>Artists</h2>
+  </div>
+</div>
+<ul>
+  <li *ngFor="let artist of artists.items">
+    <artist-summary [artist]="artist"></artist-summary>
+  </li>
+</ul>

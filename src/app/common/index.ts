@@ -3,5 +3,5 @@
  */
 export * from './login-button/login-button.component';
 export * from './login-button/login-window.service';
-export * from './storage.service';
-export * from './spotify.service';
+export * from './services/storage.service';
+export * from './services/spotify.service';

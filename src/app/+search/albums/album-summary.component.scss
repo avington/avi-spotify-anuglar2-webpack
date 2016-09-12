@@ -1,0 +1,24 @@
+@import '../../../scss/helpers/variables';
+
+.album-summary {
+
+  padding: 1.00em 1.00em 1.00em 1.00em;
+  width: 30%;
+  margin: 0 auto;
+
+  .img-container {
+    width: 8.00em;
+
+    img {
+      width: 6.00em;
+    }
+  }
+
+  .album-details {
+    margin-top: 1.50em;
+  }
+}
+
+.album-summary:first-child {
+  border-top: 1px solid $color-divider;
+}

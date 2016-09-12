@@ -1,6 +1,10 @@
-.track-summary {
+@import '../../../scss/helpers/variables';
+
+.playlist-summary {
 
   padding: 1.00em 1.00em 1.00em 1.00em;
+  width: 50%;
+  margin: 0 auto;
 
   .img-container {
     width: 8.00em;
@@ -10,7 +14,7 @@
     }
   }
 
-  .track-details {
+  .playlist-details {
     margin-top: 1.50em;
 
     .artists {
@@ -27,7 +31,8 @@
     }
   }
 
+}
 
-
-
+.playlist-summary:first-child {
+  border-top: 1px solid $color-divider;
 }
