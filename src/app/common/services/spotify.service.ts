@@ -8,7 +8,11 @@ import {ITokenContainer} from "../../auth";
 
 
 import {Store} from '@ngrx/store';
-import {RESET} from '../../store/spotify-list.store';
+import {
+  SEARCH,
+  ALBUM,
+  ERROR
+} from '../../store/spotify-list.store';
 
 const BASE_URL = 'https://api.spotify.com/v1';
 
@@ -39,8 +43,7 @@ export class SpotifyService {
   constructor(private storage: StorageService,
               private http: Http,
               private store: Store<any>,
-              private router: Router
-          ) {
+              private router: Router) {
   }
 
   getMe = () => {
@@ -56,15 +59,30 @@ export class SpotifyService {
   search = (query: string, inputType: string) => {
     this.searchApi(query, inputType)
       .subscribe((data) => {
-        this.store.dispatch({type: RESET, payload: data});
-      },
+          this.store.dispatch({type: SEARCH, payload: data});
+        },
         (error) => {
-          console.log(error);
-          if (error && error.status === 401) {
-            this.router.navigate(['/home']);
-          }
+          this.dispatchError(error);
         });
 
+  };
+
+
+
+  album = (id: string) => {
+    const authHeader = this.addTokenToHeader();
+    const albumSub = this.http.get(`${BASE_URL}/albums/${id}`, {
+      headers: authHeader
+    })
+      .map(this.extractData)
+      .catch(this.handleError);
+
+    albumSub.subscribe((data) => {
+        this.store.dispatch({type: ALBUM, payload: data})
+      },
+      (error) => {
+        this.dispatchError(error)
+      });
   };
 
   private searchApi = (q: string, inputType: string) => {
@@ -97,9 +115,18 @@ export class SpotifyService {
 
   handleError = (error: any) => {
     return Observable.throw(error.json().error);
-  }
+  };
+
+  private dispatchError = (error) => {
+    console.log(error);
+    if (error && error.status === 401) {
+      this.router.navigate(['/home']);
+    } else {
+      this.store.dispatch({type: ERROR, payload: error})
+    }
+  };
 
 
 }
-;
+
 

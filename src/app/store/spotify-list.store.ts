@@ -1,12 +1,18 @@
-import {ActionReducer, Action} from '@ngrx/store'
+import {ActionReducer, Action} from '@ngrx/store';
 import ex = require("lodash/extend");
 
 export const ADD = 'ADD';
 export const REMOVE = 'REMOVE';
-export const RESET = 'RESET';
+export const SEARCH = 'SEARCH';
+export const ALBUM = 'ALBUM';
+export const ERROR = 'ERROR';
 
-const actionFunctions: {RESET: ((state, action)=>any)} = {
-  RESET: (state, action) => {
+const actionFunctions: {SEARCH: ((state, action)=>any)} = {
+  SEARCH: (state, action) => {
+    const payload = ex({}, action.payload);
+    return payload;
+  },
+  ALBUM: (state, action) => {
     const payload = ex({}, action.payload);
     return payload;
   }
@@ -18,4 +24,4 @@ export const searchListReducer: ActionReducer<any[]> = (state: any = [], action:
   } else {
     return state;
   }
-}
+};

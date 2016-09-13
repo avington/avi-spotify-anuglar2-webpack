@@ -6,12 +6,16 @@
 
     <div class="grid-cell grid-gutters">
       <span>Song:</span>
-      <span>{{track.name}}</span>
+      <span>
+        {{track.name}}
+      </span>
     </div>
 
     <div class="grid-cell grid-gutters">
       <span>Album:</span>
-      <span>{{track.album.name}}</span>
+      <span>
+        <a routerLink="/album/{{track.album.id}}">{{track.album.name}}</a>
+      </span>
     </div>
     <div class="grid-cell grid-gutters artists">
       <div class="grid-cell grid-gutters">Artist:</div>

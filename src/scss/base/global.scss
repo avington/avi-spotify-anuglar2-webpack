@@ -12,6 +12,23 @@ html, body {
   font-size: 16px;
 }
 
+a {
+  color: $color-accent;
+  text-decoration: underline;
+}
+a:hover {
+  color: $color-accent;
+  text-decoration: underline;
+}
+a:active {
+  color: $color-accent;
+  text-decoration: underline;
+}
+a:visited {
+  color: $color-accent;
+  text-decoration: underline;
+}
+
 li {
   list-style: none;
 }

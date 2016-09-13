@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import {RESET} from '../../store';
 import 'rxjs/add/operator/take';
 import extend = require("lodash/extend");
 import clone = require("lodash/clone");
