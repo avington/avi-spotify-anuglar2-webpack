@@ -1,0 +1,19 @@
+@import '../../scss/helpers/variables.scss';
+
+div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+a {
+  display: inline-block;
+  margin-bottom: 8px;
+  width: calc(50% - 4px);
+}
+
+figure {
+  padding: 2.50em;
+  margin: 2.5em 5.0em 2.5em 5.0em;
+  width: 100px;
+  border: 1px solid $color-divider;
+}

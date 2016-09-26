@@ -1,0 +1,21 @@
+.album {
+  display: block;
+
+  .legend {
+    display: flex;
+
+    img {
+      width: 20.00em;
+    }
+
+    .heading {
+      margin: 0 0 0 5.00em;
+    }
+  }
+
+  .tracks {
+    .track {
+      display: flex;
+    }
+  }
+}

@@ -29,9 +29,8 @@ export class AuthService {
     if (!container) {
       return false;
     }
-    const expires = moment(container.expires)
-    const isBefore = moment().isBefore(expires);
-    return isBefore;
+    const expires = moment(container.expires);
+    return moment().isBefore(expires);
 
 
   };

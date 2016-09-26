@@ -2,6 +2,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
+import {HttpModule} from '@angular/http'
 
 
 import {SearchComponent} from './search.component';
@@ -45,7 +46,8 @@ export const routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpModule
   ]
 })
 export default class AboutModule {

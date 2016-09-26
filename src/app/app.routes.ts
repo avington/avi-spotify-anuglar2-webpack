@@ -19,5 +19,8 @@ export const ROUTES: Routes = [
   {
     path: 'album/:id', loadChildren: () => System.import('./+album')
   },
+  {
+    path: 'artist', loadChildren: () => System.import('./+artist')
+  },
   { path: '**',    component: NoContent },
 ];

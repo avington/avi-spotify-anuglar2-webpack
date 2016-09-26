@@ -1,4 +1,4 @@
-<div class="track-summary grid grid-justify-center">
+<div class="track-summary grid grid-justify-center" *ngIf="track && track.album">
   <div class="img-container">
     <img [src]="track.album.images[0].url">
   </div>
@@ -11,7 +11,7 @@
       </span>
     </div>
 
-    <div class="grid-cell grid-gutters">
+    <div class="grid-cell grid-gutters" *ngIf="track.album">
       <span>Album:</span>
       <span>
         <a routerLink="/album/{{track.album.id}}">{{track.album.name}}</a>
@@ -21,7 +21,7 @@
       <div class="grid-cell grid-gutters">Artist:</div>
       <ul class="grid-cell grid-gutters">
         <li *ngFor="let item of track.artists">
-          {{item.name}}
+          <a routerLink="/artist/{{item.id}}">{{item.name}}</a>
         </li>
       </ul>
     </div>

@@ -12,6 +12,7 @@ import {searchListReducer} from './store'
  */
 import {ENV_PROVIDERS} from './environment';
 import {ROUTES} from './app.routes';
+
 // App is our top level component
 import {App} from './app.component';
 import {APP_RESOLVER_PROVIDERS} from './app.resolver';
@@ -22,11 +23,12 @@ import {
   LoginButtonComponent,
   LoginWindowService,
   StorageService,
-  SpotifyService
+  SpotifyService,
 } from './common';
 import {AuthService} from './auth'
 import {NoContent} from './no-content';
 import {XLarge} from './home/x-large';
+import {PlayerModule} from "./player/index";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -52,7 +54,8 @@ const APP_PROVIDERS = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
-    StoreModule.provideStore({searchList: searchListReducer}, {searchList: {}})
+    StoreModule.provideStore({searchList: searchListReducer}, {searchList: {}}),
+    PlayerModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

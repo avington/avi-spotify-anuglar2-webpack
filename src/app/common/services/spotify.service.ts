@@ -1,16 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Observable}     from 'rxjs/Rx';
-import {Headers, Http, Response} from '@angular/http';
-import {Router} from '@angular/router'
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { Headers, Http, Response } from '@angular/http';
+import { Router } from '@angular/router'
 
-import {StorageService} from './storage.service'
-import {ITokenContainer} from "../../auth";
+import { StorageService } from './storage.service'
+import { ITokenContainer } from "../../auth";
 
 
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import {
   SEARCH,
   ALBUM,
+  ARTIST,
   ERROR
 } from '../../store/spotify-list.store';
 
@@ -41,9 +42,9 @@ export interface ISpotifyUser {
 export class SpotifyService {
 
   constructor(private storage: StorageService,
-              private http: Http,
-              private store: Store<any>,
-              private router: Router) {
+    private http: Http,
+    private store: Store<any>,
+    private router: Router) {
   }
 
   getMe = () => {
@@ -59,11 +60,11 @@ export class SpotifyService {
   search = (query: string, inputType: string) => {
     this.searchApi(query, inputType)
       .subscribe((data) => {
-          this.store.dispatch({type: SEARCH, payload: data});
-        },
-        (error) => {
-          this.dispatchError(error);
-        });
+        this.store.dispatch({ type: SEARCH, payload: data });
+      },
+      (error) => {
+        this.dispatchError(error);
+      });
 
   };
 
@@ -78,12 +79,35 @@ export class SpotifyService {
       .catch(this.handleError);
 
     albumSub.subscribe((data) => {
-        this.store.dispatch({type: ALBUM, payload: data})
-      },
+      this.store.dispatch({ type: ALBUM, payload: data })
+    },
       (error) => {
         this.dispatchError(error)
       });
   };
+
+  artist = (id: string) => {
+    const authHeader = this.addTokenToHeader();
+
+    Observable.forkJoin(
+      this.http.get(`${BASE_URL}/artists/${id}`, {
+        headers: authHeader
+      }).map(this.extractData),
+      this.http.get(`${BASE_URL}/artists/${id}/albums?market=US&album_type=album`, {
+        headers: authHeader
+      }).map(this.extractData),
+      this.http.get(`${BASE_URL}/artists/${id}/top-tracks?country=US`, {
+        headers: authHeader
+      }).map(this.extractData)
+    ).subscribe((data: Array<any>) => {
+      this.store.dispatch({ type: ARTIST, payload: data })
+    }, (error) => {
+      this.dispatchError(error);
+    });
+
+  };
+
+
 
   private searchApi = (q: string, inputType: string) => {
     // q=young+the+giant&type=playlist
@@ -122,7 +146,7 @@ export class SpotifyService {
     if (error && error.status === 401) {
       this.router.navigate(['/home']);
     } else {
-      this.store.dispatch({type: ERROR, payload: error})
+      this.store.dispatch({ type: ERROR, payload: error })
     }
   };
 

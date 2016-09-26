@@ -3,20 +3,22 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import {AlbumComponent} from './album.component'
+import {ArtistComponent} from './artist.component'
 import {PlayerModule} from "../player/index";
+import {AlbumThumbnailComponent} from "./album-thumbnails.component";
 
 
-console.log('`Album` bundle loaded asynchronously');
+console.log('`Artist` bundle loaded asynchronously');
 // async components must be named routes for WebpackAsyncRoute
 export const routes = [
-  { path: '', component: AlbumComponent, pathMatch: 'full' }
+  { path: ':id', component: ArtistComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
   declarations: [
     // Components / Directives/ Pipes
-    AlbumComponent
+    ArtistComponent,
+    AlbumThumbnailComponent
   ],
   imports: [
     CommonModule,

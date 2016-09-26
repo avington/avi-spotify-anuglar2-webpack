@@ -1,0 +1,25 @@
+.artist {
+  display: block;
+
+  .legend {
+    display: flex;
+
+    img {
+      width: 20.00em;
+    }
+
+    .heading {
+      margin: 0 0 0 5.00em;
+      width: 100%;
+
+      .genre {
+          span {
+              padding-left: 1.00em;
+              padding-right: 1.00em;
+          }
+      }
+    }
+  }
+
+  
+}

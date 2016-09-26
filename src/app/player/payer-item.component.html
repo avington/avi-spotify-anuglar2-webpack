@@ -1,0 +1,23 @@
+<div class="grid grid-center">
+  <div class="grid-cell">
+    <audio controls>
+      <source src="{{track.preview_url}}" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  <div class="grid-cell">
+    {{track.name}}
+  </div>
+  <div class="grid-cell grid artist-column">
+    <div class="grid-cell text-algin-right grid-cell-top">Artist:</div>
+    <div class="grid-cell grid-cell-top">
+      <ul>
+        <li *ngFor="let artist of track.artists" class="text-algin-left">
+          <a routerLink="/artist/{{artist.id}}">{{artist.name}}</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+

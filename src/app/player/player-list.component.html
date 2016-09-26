@@ -1,0 +1,18 @@
+
+<div class="tracks" >
+
+  <div class="player-list-summary grid">
+    <div class="grid-cell">Total Records: {{tracks.total}}</div>
+    <div class="grid-cell"></div>
+    <div class="grid-cell"></div>
+  </div>
+
+  <div *ngIf="tracks.items">
+    <div *ngFor="let item of tracks.items">
+      <player-item  [track]="item"></player-item>
+    </div>
+
+  </div>
+
+
+</div>

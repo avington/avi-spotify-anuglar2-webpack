@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {AuthService} from '../../auth';
-import {CLIENT_ID, REDIRECT_URI} from '../../auth/settings'
+import {AuthService} from '../../../auth';
+import {CLIENT_ID, REDIRECT_URI} from '../../../auth/settings';
 
 
 @Injectable()

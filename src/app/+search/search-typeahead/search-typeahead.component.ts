@@ -13,7 +13,6 @@ export interface ISearchQuery {
 }
 
 @Component({
-  moduleId: module.id,
   selector: 'search-typeahead',
   templateUrl: 'search-typeahead.component.html',
   styleUrls: ['search-typeahead.component.scss']
@@ -51,7 +50,7 @@ export class SearchTypeAheadComponent implements OnInit {
      console.log(term);
      });
      */
-    const keypresses: Observable<any> = this.searchControl.valueChanges;
+    const keypresses: Observable<string> = this.searchControl.valueChanges;
 
     const search = (q => console.log(q));
 
@@ -65,7 +64,6 @@ export class SearchTypeAheadComponent implements OnInit {
 
 
     this.items.subscribe(q => {
-      console.log('search', this.search);
       this.spotify.search(q, this.search.type);
     });
 

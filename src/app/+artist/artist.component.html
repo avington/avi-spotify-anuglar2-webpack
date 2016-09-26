@@ -1,0 +1,27 @@
+<div class="container artist">
+    <div class="legend">
+        <div class="image-container">
+            <div class="image-panel">
+                <img *ngIf="artist.info && artist.info.images" [src]="artist.info.images[0].url" alt="Artist Image">
+            </div>
+        </div>
+        <div class="heading">
+            <h3 *ngIf="artist.info && artist.info.name">{{artist.info.name}}</h3>
+            <div class="grid genre" *ngIf="artist.info && artist.info.genres">
+                <div class="grid-cell">Genres:
+                    <span *ngFor="let genre of artist.info.genres">{{genre}}</span>
+                </div>
+                <div class="grid-cell"></div>
+            </div>
+        </div>
+    </div>
+  <h4>Albums</h4>
+  <div class="artist-albums">
+    <album-thumbnails [albums]="artist.albums"></album-thumbnails>
+  </div>
+  <h4>Top Songs</h4>
+  <div class="artist-top-songs" *ngIf="artist.topSongs">
+    <player-list [tracks]="artist.topSongs"></player-list>
+  </div>
+
+</div>

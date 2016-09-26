@@ -5,16 +5,35 @@ export const ADD = 'ADD';
 export const REMOVE = 'REMOVE';
 export const SEARCH = 'SEARCH';
 export const ALBUM = 'ALBUM';
+export const ARTIST = 'ARTIST';
 export const ERROR = 'ERROR';
 
-const actionFunctions: {SEARCH: ((state, action)=>any)} = {
+export interface IActionFunctions {
+  SEARCH: ((state, action)=>any),
+  ALBUM: ((state, action)=>any),
+  ARTIST: ((state, action)=>any),
+}
+
+const actionFunctions: IActionFunctions = {
   SEARCH: (state, action) => {
     const payload = ex({}, action.payload);
     return payload;
+
   },
   ALBUM: (state, action) => {
     const payload = ex({}, action.payload);
     return payload;
+  },
+  ARTIST: (state, action) => {
+    const artist = ex({}, {
+      info: action.payload[0],
+      albums: action.payload[1],
+      topSongs: {
+        total: action.payload[2].tracks.length,
+        items: action.payload[2].tracks
+      }
+    });
+    return artist;
   }
 };
 

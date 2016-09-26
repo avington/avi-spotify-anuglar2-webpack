@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/subscription';
 import { Store } from '@ngrx/store';
 
 import {SpotifyService} from './../common/services/spotify.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'album',
   templateUrl: 'album.component.html',
   styleUrls: ['album.component.scss']
@@ -32,7 +30,7 @@ export class AlbumComponent implements OnInit {
     store.select('searchList').subscribe((album) => {
       console.log('this is an album', album);
       this.album = album;
-    })
+    });
   }
 
 }

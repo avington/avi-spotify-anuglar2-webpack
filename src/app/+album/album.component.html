@@ -1,1 +1,25 @@
-<h1>Album</h1>
+<div class="container album">
+  <div class="legend">
+    <div class="image-container">
+      <div class="image-panel">
+        <img *ngIf="album.images" [src]="album.images[0].url" alt="Album Image">
+      </div>
+    </div>
+    <div class="heading">
+      <h3 *ngIf="album.name">{{album.name}}</h3>
+      <div class="artist-container">
+        <div class="artist" >
+          <div *ngIf="album.artists">
+            <div *ngFor="let item of album.artists">
+              <a routerLink="/artist/{{item.id}}">{{item.name}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="album && album.tracks">
+    <player-list [tracks]="album.tracks"></player-list>
+  </div>
+
+</div>

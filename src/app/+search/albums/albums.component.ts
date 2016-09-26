@@ -1,7 +1,6 @@
 import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'albums',
   templateUrl: 'albums.component.html',
   styleUrls: ['albums.component.scss'],
