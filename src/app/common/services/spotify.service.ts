@@ -12,6 +12,7 @@ import {
   SEARCH,
   ALBUM,
   ARTIST,
+  FEATURED_PLAYLISTS,
   ERROR
 } from '../../store/spotify-list.store';
 
@@ -68,8 +69,6 @@ export class SpotifyService {
 
   };
 
-
-
   album = (id: string) => {
     const authHeader = this.addTokenToHeader();
     const albumSub = this.http.get(`${BASE_URL}/albums/${id}`, {
@@ -80,6 +79,22 @@ export class SpotifyService {
 
     albumSub.subscribe((data) => {
       this.store.dispatch({ type: ALBUM, payload: data })
+    },
+      (error) => {
+        this.dispatchError(error)
+      });
+  };
+
+  featuredPlaylists = () => {
+    const authHeader = this.addTokenToHeader();
+    const playlistSub = this.http.get(`${BASE_URL}/browse/featured-playlists?country=US`, {
+      headers: authHeader
+    })
+      .map(this.extractData)
+      .catch(this.handleError);
+
+    playlistSub.subscribe((data) => {
+      this.store.dispatch({ type: FEATURED_PLAYLISTS, payload: data })
     },
       (error) => {
         this.dispatchError(error)

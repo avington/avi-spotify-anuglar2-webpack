@@ -6,12 +6,14 @@ export const REMOVE = 'REMOVE';
 export const SEARCH = 'SEARCH';
 export const ALBUM = 'ALBUM';
 export const ARTIST = 'ARTIST';
+export const FEATURED_PLAYLISTS = 'FEATURED_PLAYLISTS';
 export const ERROR = 'ERROR';
 
 export interface IActionFunctions {
   SEARCH: ((state, action)=>any),
   ALBUM: ((state, action)=>any),
   ARTIST: ((state, action)=>any),
+  FEATURED_PLAYLISTS: ((state, action) => any);
 }
 
 const actionFunctions: IActionFunctions = {
@@ -21,6 +23,10 @@ const actionFunctions: IActionFunctions = {
 
   },
   ALBUM: (state, action) => {
+    const payload = ex({}, action.payload);
+    return payload;
+  },
+  FEATURED_PLAYLISTS: (state, action) => {
     const payload = ex({}, action.payload);
     return payload;
   },
