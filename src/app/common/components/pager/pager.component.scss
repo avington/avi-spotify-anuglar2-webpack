@@ -1,0 +1,17 @@
+.pager {
+    display: flex;
+    width: 5.00em;
+
+    .pager-button {
+        flex: 1
+
+    }
+}
+
+button {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+}

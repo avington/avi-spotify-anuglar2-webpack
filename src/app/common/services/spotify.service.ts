@@ -13,6 +13,7 @@ import {
   ALBUM,
   ARTIST,
   FEATURED_PLAYLISTS,
+  CATEGORIES,
   ERROR
 } from '../../store/spotify-list.store';
 
@@ -95,6 +96,22 @@ export class SpotifyService {
 
     playlistSub.subscribe((data) => {
       this.store.dispatch({ type: FEATURED_PLAYLISTS, payload: data })
+    },
+      (error) => {
+        this.dispatchError(error)
+      });
+  };
+  
+  gettingCategories = () => {
+    const authHeader = this.addTokenToHeader();
+    const playlistSub = this.http.get(`${BASE_URL}/browse/categories?country=US`, {
+      headers: authHeader
+    })
+      .map(this.extractData)
+      .catch(this.handleError);
+
+    playlistSub.subscribe((data) => {
+      this.store.dispatch({ type: CATEGORIES, payload: data })
     },
       (error) => {
         this.dispatchError(error)

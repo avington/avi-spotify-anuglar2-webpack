@@ -25,5 +25,8 @@ export const ROUTES: Routes = [
   {
     path: 'playlists', loadChildren: () => System.import('./+playlists')
   },
+  {
+    path: 'categories', loadChildren: () => System.import('./+categories')
+  },
   { path: '**',    component: NoContent },
 ];

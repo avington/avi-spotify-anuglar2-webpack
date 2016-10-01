@@ -1,2 +1,10 @@
 <h3>Featured Playlists</h3>
-<div class="spotify-message">{{featuredPlaylists.message}}</div>
+<div class="spotify-message">{{message}}</div>
+<div class="featured-playlist-container grid grid-gutter grid-wrap" 
+    ng-if="featuredPlaylists">
+    <div class="grid-cell" *ngFor="let item of featuredPlaylists">
+        <playlist-item [playlist]="item"></playlist-item>
+    </div>
+    
+
+</div>

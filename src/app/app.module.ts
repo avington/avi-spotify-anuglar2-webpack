@@ -29,6 +29,7 @@ import {AuthService} from './auth'
 import {NoContent} from './no-content';
 import {XLarge} from './home/x-large';
 import {PlayerModule} from "./player/index";
+import { PagerComponent } from './common/components/pager/pager.component';
 
 // Application wide providers
 const APP_PROVIDERS = [

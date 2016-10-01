@@ -3,6 +3,13 @@ import { SpotifyService } from './../../common/services/spotify.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+export interface IFeaturedPlaylist {
+    message: string;
+    playlists: {
+        items: Array<any>
+    }
+}
+
 @Component({
     moduleId: module.id,
     selector: 'featured-playlists',
@@ -17,7 +24,8 @@ export class FeaturedPlaylistsComponent implements OnInit {
               private store: Store<any>
     ) { }
 
-    featuredPlaylists: any;
+    featuredPlaylists: Array<any>;
+    message: string;
 
     ngOnInit() {
         this.getState(this.store);
@@ -25,9 +33,12 @@ export class FeaturedPlaylistsComponent implements OnInit {
      }
 
      private getState = (store: Store<any>) => {
-    store.select('searchList').subscribe((featuredPlaylists) => {
+    store.select('searchList').subscribe((featuredPlaylists: IFeaturedPlaylist) => {
       console.log('this is the featuredPlaylists', featuredPlaylists);
-      this.featuredPlaylists = featuredPlaylists;
+      this.message = featuredPlaylists.message;
+      if (featuredPlaylists.playlists && featuredPlaylists.playlists.items) {
+          this.featuredPlaylists = featuredPlaylists.playlists.items;
+      }
     });
   }
 

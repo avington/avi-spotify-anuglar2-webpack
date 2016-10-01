@@ -1,0 +1,12 @@
+<div class="playlist-item-container">
+    <div>
+        <a routerLink="/playlists/{{playlist.id}}">
+            <img [src]="imageUrl" [alt]="playlist.name">
+        </a>
+    </div>
+    <div class="text-algin-center">
+        <a routerLink="/playlists/{{playlist.id}}">
+            {{playlist.name}}
+        </a>
+    </div>
+</div>
