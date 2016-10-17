@@ -1,3 +1,4 @@
+import { FaderComponent } from './../common/components/fader/fader.component';
 import { PagerComponent } from './../common/components/pager/pager.component';
 import { CategoriesComponent } from './categories.component';
 import {CommonModule} from '@angular/common';
@@ -18,7 +19,8 @@ export const routes = [
   declarations: [
     // Components / Directives/ Pipes
     CategoriesComponent,
-    PagerComponent
+    PagerComponent,
+    FaderComponent
   ],
   imports: [
     CommonModule,

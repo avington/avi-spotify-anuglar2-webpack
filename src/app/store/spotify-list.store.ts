@@ -8,7 +8,7 @@ export const ALBUM = 'ALBUM';
 export const ARTIST = 'ARTIST';
 export const FEATURED_PLAYLISTS = 'FEATURED_PLAYLISTS';
 export const ERROR = 'ERROR';
-export const CATEGORIES = '  CATEGORIES';
+export const CATEGORIES = 'CATEGORIES';
 
 export interface IActionFunctions {
   SEARCH: ((state, action) => any);

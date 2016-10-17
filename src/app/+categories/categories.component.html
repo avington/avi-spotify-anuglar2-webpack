@@ -1,7 +1,9 @@
 <div class="container categories-container">
     <h3>Categories</h3>
-    <pager [currentPage]="currentPage" [lastPage]="lastPage" (pageChanged)="pageChanged($event)"></pager>
+    <pager [offset]="offset" [limit]="limit" [total]="total" (pageChanged)="pageChanged($event)"></pager>
     <div class="categories grid grid-gutter grid-wrap">
-
+        <fader [isVisible]="showPanel">
+            Hello from fader
+        </fader>
     </div>
 </div>

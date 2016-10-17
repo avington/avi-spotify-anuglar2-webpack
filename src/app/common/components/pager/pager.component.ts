@@ -10,58 +10,71 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleCha
 export class PagerComponent implements OnInit, OnChanges {
     constructor() { }
 
-    isLeftDisabled: boolean;
-    isRightDisabled: boolean;
+    isPreviousDisabled: boolean;
+    isNextDisabled: boolean;
 
     ngOnInit() {
-        this.checkDisabled(this.currentPage, this.lastPage);
-     }
+        console.log('this is the pager control', this);
+        this.checkDisabled(this.offset, this.limit, this.total);
+    }
 
-     ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-        let changesMsgs: string[] = [];
-        for (let propName in changes) {
-            if (propName === 'currentPage') {
-                const currentPage: number = propName[propName];
-                this.checkDisabled(currentPage, this.lastPage);
-            }
-            if (propName === 'lastPage') {
-                const lastPage: number = propName[propName];
-                this.checkDisabled(this.currentPage, lastPage);
-            }
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
+
+        const strategy = {
+            offset: (currentValue: any) => {
+                this.checkDisabled(currentValue, this.limit, this.total);
+            },
+            limit: (currentValue: any) => {
+                this.checkDisabled(this.offset, currentValue, this.total);
+            },
+            total: (currentValue: any) => {
+                this.checkDisabled(this.offset, this.limit, currentValue);
+            },
+           
+        };
+
+        for (let propertyName in changes) {
+            strategy[propertyName](changes[propertyName].currentValue);
         }
     }
-     
-    @Input() currentPage: number;
-    @Input() lastPage: number;
+
+    @Input() limit: number;
+    @Input() offset: number;
+    @Input() total: number;
     @Output() pageChanged = new EventEmitter();
 
-    pageLeft = () => {
+    goPrevious = () => {
+
         this.pageChanged.emit({
             payload: {
-                currentPage: this.currentPage - 1
+                offset: this.offset + this.limit
             }
         })
     }
 
-    pageRight = () => {
+    goNext = () => {
+
         this.pageChanged.emit({
             payload: {
-                currentPage: this.currentPage + 1
+                offet: this.offset - this.limit
             }
         })
     }
 
-    private checkDisabled = (currentPage: number, lastPage: number) => {
-        if (currentPage <= 1) {
-            this.isLeftDisabled = true;
+    private checkDisabled = (offset: number, limit: number, total: number) => {
+        const nextOffset = offset + limit;
+        const prevOffset = offset - limit;
+
+        if (nextOffset >= total) {
+            this.isNextDisabled = true;
         } else {
-            this.isLeftDisabled = false;
+            this.isNextDisabled = false;
         }
-        
-        if (currentPage >= lastPage) {
-            this.isRightDisabled = true;
+
+        if (prevOffset <= 0) {
+            this.isPreviousDisabled = true;
         } else {
-            this.isRightDisabled = false;
+            this.isPreviousDisabled = false;
         }
     }
 }

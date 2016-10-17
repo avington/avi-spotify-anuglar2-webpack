@@ -102,15 +102,25 @@ export class SpotifyService {
       });
   };
   
-  gettingCategories = () => {
+  gettingCategories = (limit: number = 20, offset: number = 0) => {
     const authHeader = this.addTokenToHeader();
-    const playlistSub = this.http.get(`${BASE_URL}/browse/categories?country=US`, {
+    let url = `${BASE_URL}/browse/categories?country=US`;
+
+    if (limit) {
+      url += `&limit=${limit}`
+    }
+
+    if (offset) {
+      url += `&offset=${offset}`
+    }
+
+    const catSub = this.http.get(url, {
       headers: authHeader
     })
       .map(this.extractData)
       .catch(this.handleError);
 
-    playlistSub.subscribe((data) => {
+    catSub.subscribe((data) => {
       this.store.dispatch({ type: CATEGORIES, payload: data })
     },
       (error) => {
