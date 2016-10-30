@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { SpotifyService } from './../../common/services/spotify.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 export interface IFeaturedPlaylist {
     message: string;
@@ -16,7 +16,7 @@ export interface IFeaturedPlaylist {
     templateUrl: 'featured-playlists.component.html',
     styleUrls: ['featured-playlists.component.scss']
 })
-export class FeaturedPlaylistsComponent implements OnInit {
+export class FeaturedPlaylistsComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
               private router: Router,
@@ -30,6 +30,10 @@ export class FeaturedPlaylistsComponent implements OnInit {
     ngOnInit() {
         this.getState(this.store);
         this.spotify.featuredPlaylists();
+     }
+
+     ngOnDestroy() {
+         
      }
 
      private getState = (store: Store<any>) => {

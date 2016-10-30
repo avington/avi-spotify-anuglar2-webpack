@@ -101,18 +101,11 @@ export class SpotifyService {
         this.dispatchError(error)
       });
   };
-  
-  gettingCategories = (limit: number = 20, offset: number = 0) => {
+
+  gettingCategories = (limit: number = 20, offset: number = 0, categoryId: string) => {
     const authHeader = this.addTokenToHeader();
-    let url = `${BASE_URL}/browse/categories?country=US`;
-
-    if (limit) {
-      url += `&limit=${limit}`
-    }
-
-    if (offset) {
-      url += `&offset=${offset}`
-    }
+    const urlIdSegment = categoryId ? `/${categoryId}/playlists` : '';
+    let url = `${BASE_URL}/browse/categories${urlIdSegment}?country=US&limit=${limit}&offset=${offset}`;
 
     const catSub = this.http.get(url, {
       headers: authHeader
@@ -149,7 +142,21 @@ export class SpotifyService {
 
   };
 
+  gettingPlaylist = (playlistId: string, owner: string, limit: number, offset: number) => {
+    const authHeader = this.addTokenToHeader();
 
+    const url = `${BASE_URL}/users/${owner}/playlists/${playlistId}?country=US&limit=${limit}&offset=${offset}`;
+
+    const playlistSubscription = this.http.get(url, {
+      headers: authHeader
+    })
+    .map(this.extractData)
+    .catch(this.handleError);
+
+    playlistSubscription.subscribe((data) => {
+      console.log(data);
+    })
+  }
 
   private searchApi = (q: string, inputType: string) => {
     // q=young+the+giant&type=playlist

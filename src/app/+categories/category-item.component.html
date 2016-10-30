@@ -1,0 +1,12 @@
+<div class="category-item-container">
+    <div>
+        <a routerLink="/{{item.type}}/{{item.id}}/{{item.owner}}">
+            <img [src]="item.iconUrl" [alt]="item.name">
+        </a>
+    </div>
+    <div class="text-algin-center">
+        <a routerLink="/{{item.type}}/{{item.id}}/{{item.owner}}">
+            {{item.name}}
+        </a>
+    </div>
+</div>

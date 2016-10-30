@@ -1,0 +1,5 @@
+<div class="category-list grid grid-gutter grid-wrap" *ngIf="items">
+    <div class="category-flex-panel" *ngFor="let item of items">
+        <category-item [item]="item"></category-item>
+    </div>
+</div>

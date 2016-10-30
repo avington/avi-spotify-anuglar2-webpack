@@ -47,7 +47,9 @@ export class PagerComponent implements OnInit, OnChanges {
 
         this.pageChanged.emit({
             payload: {
-                offset: this.offset + this.limit
+                offset: this.offset - this.limit,
+                limit: this.limit,
+                total: this.total
             }
         })
     }
@@ -56,7 +58,9 @@ export class PagerComponent implements OnInit, OnChanges {
 
         this.pageChanged.emit({
             payload: {
-                offet: this.offset - this.limit
+                offset: this.offset + this.limit,
+                limit: this.limit,
+                total: this.total
             }
         })
     }
@@ -71,7 +75,7 @@ export class PagerComponent implements OnInit, OnChanges {
             this.isNextDisabled = false;
         }
 
-        if (prevOffset <= 0) {
+        if (prevOffset < 0) {
             this.isPreviousDisabled = true;
         } else {
             this.isPreviousDisabled = false;

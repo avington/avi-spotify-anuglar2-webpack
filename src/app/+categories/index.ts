@@ -1,3 +1,5 @@
+import { CategoryItemComponent } from './category-item.component';
+import { CategoryListComponent } from './category-list.component';
 import { FaderComponent } from './../common/components/fader/fader.component';
 import { PagerComponent } from './../common/components/pager/pager.component';
 import { CategoriesComponent } from './categories.component';
@@ -12,13 +14,17 @@ import {HttpModule} from '@angular/http'
 console.log('`Categories` bundle loaded asynchronously');
 // async components must be named routes for WebpackAsyncRoute
 export const routes = [
-  {path: '', component: CategoriesComponent, pathMatch: 'full'}
+  {path: '', component: CategoriesComponent, pathMatch: 'full'},
+  {path: ':id', component: CategoriesComponent, pathMatch: 'full'},
+  {path: ':id/:owner', component: CategoriesComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
   declarations: [
     // Components / Directives/ Pipes
     CategoriesComponent,
+    CategoryListComponent,
+    CategoryItemComponent,
     PagerComponent,
     FaderComponent
   ],

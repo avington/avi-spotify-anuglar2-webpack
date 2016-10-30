@@ -12,7 +12,8 @@ import ex = require("lodash/extend");
 })
 export class CategoriesComponent implements OnInit {
 
-    constructor(route: ActivatedRoute,
+    constructor(
+        private route: ActivatedRoute,
         private router: Router,
         private spotify: SpotifyService,
         private store: Store<any>,
@@ -25,35 +26,82 @@ export class CategoriesComponent implements OnInit {
     total: number;
     categories: any;
     label: string;
+    items: Array<any>;
+    categoryId: string;
 
     ngOnInit() {
 
-        this.showPanel = false;
-        this.getState(this.store);
-        this.spotify.gettingCategories();
+        this.route.params.subscribe((params: any) => {
+            this.categoryId = params.id || '';
+            this.showPanel = false;
+            this.getState(this.store);
+            this.spotify.gettingCategories(20, 0, this.categoryId);
+            console.log('this is the route param', params);
+        })
+
+
     }
 
     pageChanged = ($event) => {
-        console.log('pageChanged', $event);
+        console.log('pageChanged', $event.payload);
+        this.spotify.gettingCategories($event.payload.limit, $event.payload.offset, this.categoryId);
+        this.showPanel = false;
     };
 
     getState = (store: Store<any>) => {
         store.select('searchList').subscribe((payload: any) => {
-            if (payload.categories) {
-                this.zone.run(() => {
-                    this.setProperties(payload.categories)
-                })
-
-            }
-
-
+            this.zone.run(() => {
+                this.setProperties(payload);
+                this.showPanel = true;
+            });
         });
     };
 
-    setProperties = (categories: any) => {
-        this.categories = Object.assign({}, categories);
-        this.limit = categories.limit;
-        this.offset = categories.offset;
-        this.total = categories.total;
+    private setProperties = (payload: any) => {
+        if (payload.categories) {
+            this.items = this.mapCategoryItems(payload.categories.items)
+            this.limit = payload.categories.limit;
+            this.offset = payload.categories.offset;
+            this.total = payload.categories.total;
+        } else if (payload.playlists) {
+            this.items = this.mapPlaylistsItems(payload.playlists.items)
+            this.limit = payload.playlists.limit;
+            this.offset = payload.playlists.offset;
+            this.total = payload.playlists.total;
+        }
+        
     }
+
+    private mapCategoryItems = (items: Array<any>) => {
+        return items.map((item: any) => {
+            return Object.assign(
+                {},
+                {
+                    id: item.id,
+                    name: item.name,
+                    iconHeight: item.icons[0].height,
+                    iconWidth: item.icons[0].width,
+                    iconUrl: item.icons[0].url,
+                    type: 'categories'
+                }
+            );
+        });
+    };
+    
+    private mapPlaylistsItems = (items: Array<any>) => {
+        return items.map((item: any) => {
+            return Object.assign(
+                {},
+                {
+                    id: item.id,
+                    name: item.name,
+                    iconHeight: item.images[0].height,
+                    iconWidth: item.images[0].width,
+                    iconUrl: item.images[0].url,
+                    type: 'playlists',
+                    owner: item.owner.id
+                }
+            );
+        });
+    };
 }

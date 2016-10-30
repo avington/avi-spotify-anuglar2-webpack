@@ -1,11 +1,11 @@
 <div class="playlist-item-container">
     <div>
-        <a routerLink="/playlists/{{playlist.id}}">
+        <a routerLink="/playlists/{{playlist.id}}/{{playlist.owner.id}}">
             <img [src]="imageUrl" [alt]="playlist.name">
         </a>
     </div>
     <div class="text-algin-center">
-        <a routerLink="/playlists/{{playlist.id}}">
+        <a routerLink="/playlists/{{playlist.id}}/{{playlist.owner.id}}">
             {{playlist.name}}
         </a>
     </div>

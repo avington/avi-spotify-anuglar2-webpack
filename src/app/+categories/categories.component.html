@@ -1,9 +1,10 @@
 <div class="container categories-container">
-    <h3>Categories</h3>
+    <h3 *ngIf="categoryId === ''">Categories</h3>
+    <h3 *ngIf="categoryId !== ''"><a routerLink="/categories">Categories</a> > {{categoryId}} </h3>
     <pager [offset]="offset" [limit]="limit" [total]="total" (pageChanged)="pageChanged($event)"></pager>
     <div class="categories grid grid-gutter grid-wrap">
         <fader [isVisible]="showPanel">
-            Hello from fader
+            <category-list [items]="items"></category-list>
         </fader>
     </div>
 </div>
